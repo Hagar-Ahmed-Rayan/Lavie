@@ -16,6 +16,8 @@ class NotificationScreen extends StatelessWidget {
                 fontWeight: FontWeight.w500,
 
               ),)),
+        backgroundColor: Colors.green,
+
       ),
       body: SingleChildScrollView(
         child: Column(

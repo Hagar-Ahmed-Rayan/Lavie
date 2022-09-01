@@ -114,7 +114,6 @@ lm=LognModel.fromJson(value.data);
 print (lm.type);
       print (lm.message);
 s='gogo';
-      print("loginnnnnnnnnnnnn doneeeeeeeeeeeeeee");
       print(loginModel);
 
      // showplantsinfo(token:value.data['data']['accessToken']);
@@ -125,6 +124,7 @@ s='gogo';
     //  showproductsinfo(token: value.data['data']['accessToken']);
 
       emit(ShopLoginSuccessState(loginModel));
+      print("loginnnnnnnnnnnnn doneeeeeeeeeeeeeee2");
 
     }).catchError((error)
     {

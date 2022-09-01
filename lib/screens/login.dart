@@ -22,22 +22,39 @@ class loginscreen extends StatelessWidget {
 
       var emailController = TextEditingController();
       var passwordController = TextEditingController();
+
+
+  //  print(ShopLoginCubit.get(context).loginModel!.user!.address!);
     return BlocProvider(
       create: (BuildContext context)=>ShopLoginCubit(),
       child: BlocConsumer<ShopLoginCubit,ShopLoginStates>(
         listener: (context,state){
-       /*   if(state is ShopLoginSuccessState )
-          {     if(state.loginModel!.user!.address!=null)
+
+
+
+          if(state is ShopLoginSuccessState )
+          {
+            navto(context, const HomeLayoutScreen());
+
+
+            print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@1");
+
+            print(ShopLoginCubit.get(context).loginModel['data']['user']['address']);
+            print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@3");
+          /*  if(ShopLoginCubit.get(context).loginModel['data']['user']['address']!=null)
             {
+
+
+              navto(context, const HomeLayoutScreen());
 
             }
           else{
             ShopLoginCubit.get(context).determinePosition();
             navto(context,  AddressScreen());
-          }
+         }*/
 
           }
-*/
+
 
     if (state is ShopLoginSuccessState) {
       print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2");
@@ -168,11 +185,9 @@ class loginscreen extends StatelessWidget {
                           height: 50.0,
                           child: MaterialButton(
                             onPressed: (){
-                              print(('###########'));
 
                               if (formKey.currentState!.validate()) {
 
-                                print(('ddddddddddddddddddddddd'));
                                 print((emailController.text));
                                 print((passwordController.text));
 
@@ -181,7 +196,7 @@ class loginscreen extends StatelessWidget {
           password: passwordController.text,
           );
 
-                               navto(context,HomeLayoutScreen());
+                           //    navto(context,HomeLayoutScreen());
 
                            //          navto(context,AddressScreen());
 

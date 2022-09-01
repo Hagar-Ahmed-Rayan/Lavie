@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plantsshop/cubit/cubit.dart';
 import 'package:plantsshop/cubit/states.dart';
 import 'package:plantsshop/screens/createpost.dart';
+import 'package:plantsshop/screens/homescreen.dart';
 import 'package:plantsshop/screens/searchforproducts.dart';
 import 'package:plantsshop/shared/components.dart';
 import 'package:plantsshop/shared/endpoints.dart';
@@ -37,97 +38,193 @@ class disscussscreen extends StatelessWidget {
       },
       builder: (context, state) {
 
-        return Scaffold(
+        return DefaultTabController(
+          length: 2,
+          child: Scaffold(
     appBar: AppBar(
-      title:        Text('Disscuss Form')
+      title:        Text('Disscuss Form'),
+      backgroundColor: Colors.green,
 
     ),
     body: SingleChildScrollView(
       child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Container(
-              width: 260,
-              child: TextFormField(
-                controller: searchtext,
-                onTap:(){
-                  navto(context, productssearch());
-                },
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    print("test");
-                  }
-                },
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                width: 260,
+                child: TextFormField(
+                  controller: searchtext,
+                  onTap:(){
+                    navto(context, productssearch());
+                  },
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      print("test");
+                    }
+                  },
 
-                onFieldSubmitted: (value) {
-                  print(value);
+                  onFieldSubmitted: (value) {
+                    print(value);
 
-                  /* for(int i=0;i<ShopLoginCubit.get(context).searcheditems.length;i++) {
-                                      print(ShopLoginCubit
+                    /* for(int i=0;i<ShopLoginCubit.get(context).searcheditems.length;i++) {
+                                        print(ShopLoginCubit
+                                            .get(context)
+                                            .searcheditems[i]);
+                                        print(TOKEN);
+                                        print(
+                                            "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkak");
+                                      }*/
+                    /*len = ShopLoginCubit
                                           .get(context)
-                                          .searcheditems[i]);
-                                      print(TOKEN);
-                                      print(
-                                          "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkak");
-                                    }*/
-                  /*len = ShopLoginCubit
-                                        .get(context)
-                                        .len;*/
-                },
-                decoration: InputDecoration(
+                                          .len;*/
+                  },
+                  decoration: InputDecoration(
 
-                  prefixIcon: Icon(Icons.search,
-                    color: Colors.grey,
+                    prefixIcon: Icon(Icons.search,
+                      color: Colors.grey,
 
+                    ),
+                    fillColor: Colors.grey[200],
+                    filled: true,
+                    //  focusedBorder: ,
+                    //  focusColor: Colors.blue,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(
+                            15),
+                        borderSide: BorderSide.none),
+                    hintText: 'Search',
                   ),
-                  fillColor: Colors.grey[200],
-                  filled: true,
-                  //  focusedBorder: ,
-                  //  focusColor: Colors.blue,
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                          15),
-                      borderSide: BorderSide.none),
-                  hintText: 'Search',
                 ),
               ),
             ),
-          ),
-          SizedBox(
+            SizedBox(
 
-            width: 5,
-          ),
-        /*  Container(
-            width: 200,
-            height: 40.0,
-            child: MaterialButton(
-              onPressed: () {
-
-print('donee');
+              width: 5,
+            ),
+          /*  Container(
+              width: 200,
+              height: 40.0,
+              child: MaterialButton(
+                onPressed: () {
 
 print('donee');
 
-                print( ShopLoginCubit.get(context).myPostsModel?.data![0].title);
+print('donee');
+
+                  print( ShopLoginCubit.get(context).myPostsModel?.data![0].title);
 
 print( ShopLoginCubit.get(context).myPostsModel?.data![0].title);
 print( ShopLoginCubit.get(context).myPostsModel?.data![0].description);
-              },
-              // function,
-              child: Text(
-                'Add To Card',
-                style: TextStyle(
-                  color: Colors.white,
+                },
+                // function,
+                child: Text(
+                  'Add To Card',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(
-                3,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  3,
+                ),
+                color: Colors.green,
               ),
-              color: Colors.green,
+            ),*/
+
+
+
+
+
+
+            TabBar(
+              indicator: BoxDecoration(
+                color: Colors.grey.shade100,
+                border: Border.all(
+                  color: Colors.green,
+                  width: 3,
+                ),
+                borderRadius: BorderRadius.all(Radius.circular(12) //
+                ),
+              ),
+              labelStyle:
+              TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              isScrollable: true,
+              labelColor: Colors.green,
+              unselectedLabelColor: Colors.grey,
+              indicatorWeight: 2,
+              indicatorSize: TabBarIndicatorSize.tab,
+              indicatorColor: Colors.green,
+              unselectedLabelStyle: TextStyle(fontSize: 14),
+              tabs: [
+                //  itemproducts(ShopLoginCubit.get(context).products),
+
+                Tab(
+                  child: Text('all forms'),
+                ),
+
+                Tab(
+                  child: Text('my form'),
+                ),
+              ],
             ),
-          ),*/
+       /*      Expanded(
+              child: TabBarView(
+                children: [
+                  // first tab bar view widget
+                  Text('all fourms'),
+                  Text('my'),
+
+
+                /*  ShopLoginCubit.get(context).myPostsModel?.data!=null&& ShopLoginCubit.get(context).userModel?.data!=null ?
+
+
+
+                  ListView.separated(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    reverse: true,
+
+                    itemBuilder: (context, index) =>
+                        buildpostItem( ShopLoginCubit.get(context).myPostsModel?.data![index],ShopLoginCubit.get(context).userModel?.data),
+                    separatorBuilder: (context, index) => SizedBox(
+                      height: 10,
+                    ),
+                    itemCount:ShopLoginCubit.get(context).myPostsModel!.data!.length.toInt() ,
+                  ):
+
+                  Center(
+                    child: CircularProgressIndicator(),
+                  )*/
+
+
+
+                ],
+              ),
+            ),*/
+
+
+     ShopLoginCubit.get(context).myPostsModel?.data!=null&& ShopLoginCubit.get(context).userModel?.data!=null ?
+
+
+
+     ListView.separated(
+       physics: NeverScrollableScrollPhysics(),
+       shrinkWrap: true,
+       reverse: true,
+
+       itemBuilder: (context, index) =>
+           buildpostItem( ShopLoginCubit.get(context).myPostsModel?.data![index],ShopLoginCubit.get(context).userModel?.data),
+       separatorBuilder: (context, index) => SizedBox(
+         height: 10,
+       ),
+       itemCount:ShopLoginCubit.get(context).myPostsModel!.data!.length.toInt() ,
+     ):
+
+     Center(
+       child: CircularProgressIndicator(),
+     ),
 
 
 
@@ -137,36 +234,14 @@ print( ShopLoginCubit.get(context).myPostsModel?.data![0].description);
 
 
 
-          ShopLoginCubit.get(context).myPostsModel?.data!=null&& ShopLoginCubit.get(context).userModel?.data!=null ?
-
-
-
-          ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            reverse: true,
-
-            itemBuilder: (context, index) =>
-                buildpostItem( ShopLoginCubit.get(context).myPostsModel?.data![index],ShopLoginCubit.get(context).userModel?.data),
-            separatorBuilder: (context, index) => SizedBox(
-              height: 10,
-            ),
-            itemCount:ShopLoginCubit.get(context).myPostsModel!.data!.length.toInt() ,
-          ):
-
-        Center(
-        child: CircularProgressIndicator(),
-        )
-
-
-        ],
+          ],
 
 
       ),
     ),
     floatingActionButton: FloatingActionButton.extended(
       onPressed: () {
-        navto(context, createpost());
+          navto(context, createpost());
 
       //  ShopLoginCubit.get(context).update();
 
@@ -177,7 +252,18 @@ print( ShopLoginCubit.get(context).myPostsModel?.data![0].description);
       label: const Text('add post'),
     ),
 
-    );
+
+
+
+
+
+
+
+
+
+
+    ),
+        );
   },
   );
 }

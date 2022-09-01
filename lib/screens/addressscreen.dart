@@ -14,12 +14,13 @@ class AddressScreen extends StatelessWidget {
   var addressController=TextEditingController();
   @override
   Widget build(BuildContext context) {
-    ShopLoginCubit.get(context).determinePosition();
+   // ShopLoginCubit.get(context).determinePosition();
 
     return  BlocConsumer<ShopLoginCubit, ShopLoginStates>(
       listener: (context, state) {
         if(state is AppSuccessGetLocationState)
         {
+
           if(ShopLoginCubit.get(context).address.toString()!='null') {
             addressController.text=ShopLoginCubit.get(context).address.toString();
           }
@@ -76,7 +77,6 @@ class AddressScreen extends StatelessWidget {
                           ),
                           const SizedBox(width: 10,),
                           IconButton(onPressed: (){
-                            ShopLoginCubit.get(context).determinePosition();
 
                             cubit.getCurrentLocation();
                             print("yyyyyyyyyyyyyyyyy");
