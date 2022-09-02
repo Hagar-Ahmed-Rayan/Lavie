@@ -344,4 +344,26 @@ class AppErrorClaimFreeSeedsState extends ShopLoginStates {
   AppErrorClaimFreeSeedsState( {this.error});
 
 }
+//////////show with product id
 
+
+
+
+class ShopproductidInitialState extends ShopLoginStates {}
+
+class ShopproductidLoadingState extends ShopLoginStates {}
+
+class ShoppprodctidSuccessState extends ShopLoginStates
+{
+  var  productmodel;
+
+  ShoppprodctidSuccessState(this.productmodel);
+
+}
+
+class ShopproductidErrorState extends ShopLoginStates
+{
+  //  var error;
+
+  ShopproductidErrorState();
+}

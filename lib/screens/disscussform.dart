@@ -44,101 +44,73 @@ class disscussscreen extends StatelessWidget {
     appBar: AppBar(
       title:        Text('Disscuss Form'),
       backgroundColor: Colors.green,
+      
 
     ),
-    body: SingleChildScrollView(
-      child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Container(
-                width: 260,
-                child: TextFormField(
-                  controller: searchtext,
-                  onTap:(){
-                    navto(context, productssearch());
-                  },
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      print("test");
-                    }
-                  },
-
-                  onFieldSubmitted: (value) {
-                    print(value);
-
-                    /* for(int i=0;i<ShopLoginCubit.get(context).searcheditems.length;i++) {
-                                        print(ShopLoginCubit
-                                            .get(context)
-                                            .searcheditems[i]);
-                                        print(TOKEN);
-                                        print(
-                                            "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkak");
-                                      }*/
-                    /*len = ShopLoginCubit
-                                          .get(context)
-                                          .len;*/
-                  },
-                  decoration: InputDecoration(
-
-                    prefixIcon: Icon(Icons.search,
-                      color: Colors.grey,
-
-                    ),
-                    fillColor: Colors.grey[200],
-                    filled: true,
-                    //  focusedBorder: ,
-                    //  focusColor: Colors.blue,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                            15),
-                        borderSide: BorderSide.none),
-                    hintText: 'Search',
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-
-              width: 5,
-            ),
-          /*  Container(
-              width: 200,
-              height: 40.0,
-              child: MaterialButton(
-                onPressed: () {
-
-print('donee');
-
-print('donee');
-
-                  print( ShopLoginCubit.get(context).myPostsModel?.data![0].title);
-
-print( ShopLoginCubit.get(context).myPostsModel?.data![0].title);
-print( ShopLoginCubit.get(context).myPostsModel?.data![0].description);
+    body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Container(
+              width: 260,
+              child: TextFormField(
+                controller: searchtext,
+                onTap:(){
+                  navto(context, productssearch());
                 },
-                // function,
-                child: Text(
-                  'Add To Card',
-                  style: TextStyle(
-                    color: Colors.white,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    print("test");
+                  }
+                },
+
+                onFieldSubmitted: (value) {
+                  print(value);
+
+                  /* for(int i=0;i<ShopLoginCubit.get(context).searcheditems.length;i++) {
+                                      print(ShopLoginCubit
+                                          .get(context)
+                                          .searcheditems[i]);
+                                      print(TOKEN);
+                                      print(
+                                          "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkak");
+                                    }*/
+                  /*len = ShopLoginCubit
+                                        .get(context)
+                                        .len;*/
+                },
+                decoration: InputDecoration(
+
+                  prefixIcon: Icon(Icons.search,
+                    color: Colors.grey,
+
                   ),
+                  fillColor: Colors.grey[200],
+                  filled: true,
+                  //  focusedBorder: ,
+                  //  focusColor: Colors.blue,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(
+                          15),
+                      borderSide: BorderSide.none),
+                  hintText: 'Search',
                 ),
               ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  3,
-                ),
-                color: Colors.green,
-              ),
-            ),*/
+            ),
+          ),
+          SizedBox(
+
+            width: 5,
+          ),
 
 
 
 
 
 
-            TabBar(
+          Container(
+
+            child: TabBar(
               indicator: BoxDecoration(
                 color: Colors.grey.shade100,
                 border: Border.all(
@@ -169,62 +141,15 @@ print( ShopLoginCubit.get(context).myPostsModel?.data![0].description);
                 ),
               ],
             ),
-       /*      Expanded(
-              child: TabBarView(
-                children: [
-                  // first tab bar view widget
-                  Text('all fourms'),
-                  Text('my'),
+          ),
 
+Container(
+  height: 460,
+  child:   TabBarView(
 
-                /*  ShopLoginCubit.get(context).myPostsModel?.data!=null&& ShopLoginCubit.get(context).userModel?.data!=null ?
+    children: [
 
-
-
-                  ListView.separated(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    reverse: true,
-
-                    itemBuilder: (context, index) =>
-                        buildpostItem( ShopLoginCubit.get(context).myPostsModel?.data![index],ShopLoginCubit.get(context).userModel?.data),
-                    separatorBuilder: (context, index) => SizedBox(
-                      height: 10,
-                    ),
-                    itemCount:ShopLoginCubit.get(context).myPostsModel!.data!.length.toInt() ,
-                  ):
-
-                  Center(
-                    child: CircularProgressIndicator(),
-                  )*/
-
-
-
-                ],
-              ),
-            ),*/
-
-
-     ShopLoginCubit.get(context).myPostsModel?.data!=null&& ShopLoginCubit.get(context).userModel?.data!=null ?
-
-
-
-     ListView.separated(
-       physics: NeverScrollableScrollPhysics(),
-       shrinkWrap: true,
-       reverse: true,
-
-       itemBuilder: (context, index) =>
-           buildpostItem( ShopLoginCubit.get(context).myPostsModel?.data![index],ShopLoginCubit.get(context).userModel?.data),
-       separatorBuilder: (context, index) => SizedBox(
-         height: 10,
-       ),
-       itemCount:ShopLoginCubit.get(context).myPostsModel!.data!.length.toInt() ,
-     ):
-
-     Center(
-       child: CircularProgressIndicator(),
-     ),
+      ShopLoginCubit.get(context).myPostsModel?.data!=null&& ShopLoginCubit.get(context).userModel?.data!=null ?
 
 
 
@@ -232,12 +157,64 @@ print( ShopLoginCubit.get(context).myPostsModel?.data![0].description);
 
 
 
+      SingleChildScrollView(
+        child: ListView.separated(
+
+        physics: NeverScrollableScrollPhysics(),
+
+        shrinkWrap: true,
+
+        reverse: true,
 
 
-          ],
 
+        itemBuilder: (context, index) =>
+
+            buildpostItem( ShopLoginCubit.get(context).myPostsModel?.data![index],ShopLoginCubit.get(context).userModel?.data),
+
+        separatorBuilder: (context, index) => SizedBox(
+
+          height: 10,
+
+        ),
+
+        itemCount:ShopLoginCubit.get(context).myPostsModel!.data!.length.toInt() ,
+
+        ),
+      ):
+
+
+
+      Center(
+
+      child: CircularProgressIndicator(),
 
       ),
+
+
+
+
+
+      Text('all')
+
+
+
+    ],
+
+  ),
+),
+
+
+
+
+
+
+
+
+
+        ],
+
+
     ),
     floatingActionButton: FloatingActionButton.extended(
       onPressed: () {
@@ -270,100 +247,105 @@ print( ShopLoginCubit.get(context).myPostsModel?.data![0].description);
 }
 Widget buildpostItem(var post,var user)=>
 
-    Padding(
-      padding: const EdgeInsets.all(14.0),
-      child: Container(
-        decoration: BoxDecoration(
+    Container(
 
-          borderRadius: BorderRadius.circular(
-            3
-            ,
+      child: Padding(
+        padding: const EdgeInsets.all(14.0),
+        child: Container(
+          decoration: BoxDecoration(
+
+            borderRadius: BorderRadius.circular(
+              3
+              ,
+            ),
+            color: Colors.grey[200],
           ),
-          color: Colors.grey[200],
-        ),
 
-        height: 400,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-          children: [
-            Row(
+          height: 400,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+            children: [
+              Row(
 children: [
    CircleAvatar(
-            radius: 50.0,
+              radius: 50.0,
 
-            backgroundImage: NetworkImage(
-             // 'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
-               // constmodel['data']['user']['imageUrl']
-              user.imageUrl
+              backgroundImage: NetworkImage(
+               // 'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
+                 // constmodel['data']['user']['imageUrl']
+                user.imageUrl
 
 
-           )
+             )
   ),
 
   Text(
-    user.firstName+' '+user.lastName
-    //post['title']
-      //constmodel['data']['user']['firstName']+' '+constmodel['data']['user']['lastName']
+      user.firstName+' '+user.lastName
+      //post['title']
+        //constmodel['data']['user']['firstName']+' '+constmodel['data']['user']['lastName']
   ),
   SizedBox(
-          width: 20,
+            width: 20,
   ),
-  Text(DateTime.now().toString())
+  /*Flexible(child:
+
+  Text(DateTime.now().toString()))*/
 ],
 
-            ),
-            Text(post.title),
-            Text(post.description),
-
-          if(post.imageUrl!=null)
-          Flexible(
-
-            child: Container(
-
-
-              child: Image( image:  NetworkImage( baseurl+ post.imageUrl
               ),
-                fit: BoxFit.fill,
-                width: double.infinity,
+              Text(post.title),
+              Text(post.description),
 
-              ),
-            ),
+            if(post.imageUrl!=null)
+            Flexible(
 
-          /*  child: Container(
-
-
-              child: Image(image:
-              NetworkImage(
-                  'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
-                //  constmodel['data']['user']['imageUrl']
-              fit: BoxFit.fill,
-                width: double.infinity,
-
-              ),
-            ),*/
+              child: Container(
 
 
-          ),
-            Row(
-              children: [
-                Icon(Icons.add),
-                Text('1'),
-                Text('like'),
-                SizedBox(
-                  width: 50,
+                child: Image( image:  NetworkImage( baseurl+ post.imageUrl
                 ),
-                Icon(Icons.add),
-                Text('1'),
-                Text('comment'),
+                  fit: BoxFit.fill,
+                  width: double.infinity,
 
-              ],
+                ),
+              ),
 
-            )
+            /*  child: Container(
 
 
-          ],
+                child: Image(image:
+                NetworkImage(
+                    'https://images.pexels.com/photos/36029/aroni-arsa-children-little.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
+                  //  constmodel['data']['user']['imageUrl']
+                fit: BoxFit.fill,
+                  width: double.infinity,
+
+                ),
+              ),*/
+
+
+            ),
+              Row(
+                children: [
+                  Icon(Icons.add),
+                  Text('1'),
+                  Text('like'),
+                  SizedBox(
+                    width: 50,
+                  ),
+                  Icon(Icons.add),
+                  Text('1'),
+                  Text('comment'),
+
+                ],
+
+              )
+
+
+            ],
   ),
+          ),
         ),
       ),
     )  ;

@@ -23,3 +23,6 @@ const FORGET_PASSWORD = '/api/v1/auth/forget-password';
 const VERIFY = '/api/v1/auth/verify-otp';
 const RESET_PASSWORD = '/api/v1/auth/reset-password';
 const CLAIM_FREE_SEEDS = '/api/v1/user/me/claimFreeSeeds';
+String? plantidqr;
+const GETproductid='/api/v1/plants/:plantId';
+const GETproducti='/api/v1/plants/{plantId}';

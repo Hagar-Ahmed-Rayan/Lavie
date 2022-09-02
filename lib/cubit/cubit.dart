@@ -878,6 +878,57 @@ print("************************************88");
     });
   }
 
+///getplant withid
+
+
+var productid;
+  void showproductidinfo({
+
+    required dynamic? token,
+    required dynamic? id,
+
+  })
+  {
+    print('this is idddddddddddddd');
+    print(id);
+    emit(ShopproductidLoadingState());
+
+    DioHelper.getData(
+      token: token,
+
+      url: GETproductid,
+        query: {
+          'plantId': id,
+
+        }).then((value)
+    {
+
+
+      print(value.data);
+
+
+      print("tmammmmmmmmmmmmmmmmmmmid");
+
+
+      productid = value.data;
+      print(productid);
+
+
+      emit(ShoppprodctidSuccessState(productid));
+      print(
+          "ppppppppppppppppppppppppppppppp222222222222222pppppppppppppppppppppidddd");
+
+    }).catchError((error)
+
+    {
+
+      print("zffffffffffffffffffffffffffffffffffffffffffftproductsidd");
+      print(error);
+
+
+      emit(ShopproductidErrorState());
+    });
+  }
 
 
 
