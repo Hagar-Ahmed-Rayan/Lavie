@@ -1,6 +1,6 @@
 # plantsshop
 
-A new Flutter project.
+A new Flutter project using API.
 
 ## Getting Started
 
