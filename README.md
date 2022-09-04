@@ -1,8 +1,8 @@
 # plantsshop
 
-A new Flutter project using APIs .
-هف
-ه
+A new Flutter project using APIs.
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
