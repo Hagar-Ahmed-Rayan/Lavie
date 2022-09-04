@@ -22,6 +22,7 @@ import 'package:plantsshop/models/mypostsmodel.dart';
 import 'package:plantsshop/models/productsmodel.dart';
 import 'package:plantsshop/models/seedsmodel.dart';
 import 'package:plantsshop/screens/QR%20scan.dart';
+import 'package:plantsshop/screens/QUIZ/QUIZSCREEN.dart';
 import 'package:plantsshop/screens/disscussform.dart';
 import 'package:plantsshop/screens/homescreen.dart';
 import 'package:plantsshop/screens/notification.dart';
@@ -80,7 +81,8 @@ int  numofsearchresult=0;//number
     disscussscreen(),
     QRScanner(),
     homescreen(),
-    NotificationScreen(),
+    //QuizScreen(),
+   NotificationScreen(),
     profile(),
   ];
   void update(){
@@ -930,7 +932,126 @@ var productid;
     });
   }
 
+////////////////////////quiz screen
+  List<Question> questions = [
+    Question(
+        question: "What is the user experience?",
+        answers: [
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user."
+        ],
+        correctAnswerIndex: 1),
+    Question(
+        question: "What is the user experience?",
+        answers: [
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user."
+        ],
+        correctAnswerIndex: 1),
+    Question(
+        question: "What is the user experience?",
+        answers: [
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user."
+        ],
+        correctAnswerIndex: 1),
+    Question(
+        question: "What is the user experience?",
+        answers: [
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user."
+        ],
+        correctAnswerIndex: 1),
+    Question(
+        question: "What is the user experience?",
+        answers: [
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user."
+        ],
+        correctAnswerIndex: 1),
+    Question(
+        question: "What is the user experience?",
+        answers: [
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user."
+        ],
+        correctAnswerIndex: 1),
+    Question(
+        question: "What is the user experience?",
+        answers: [
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user."
+        ],
+        correctAnswerIndex: 1),
+    Question(
+        question: "What is the user experience?",
+        answers: [
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user."
+        ],
+        correctAnswerIndex: 1),
+    Question(
+        question: "What is the user experience?",
+        answers: [
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user."
+        ],
+        correctAnswerIndex: 1),
+    Question(
+        question: "What is the user experience?",
+        answers: [
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user.",
+          "The user experience is how the developer feels about a user."
+        ],
+        correctAnswerIndex: 1),
+  ];
+  int correctAnswers = 0;
+  int currentQuestion = 0;
+  bool isFirst = true;
+  bool isLast = false;
+  void moveToNextQuestion() {
+    currentQuestion++;
+    isFirst = false;
+    if (currentQuestion == questions.length - 1) {
+      isLast = true;
+    }
+    emit(MoveToNextQuestion());
+  }
 
+  void backToPreviousQuestion() {
+    currentQuestion--;
+    isLast = false;
+    if (currentQuestion == 0) {
+      isFirst = true;
+    }
+    emit(MoveToPreviousQuestion());
+  }
+
+  void chooseAnswer(int answerId) {
+    questions[currentQuestion].userAnswerIndex = answerId;
+    emit(ChooseAnswerState());
+  }
+
+  void calculateResult() {
+    correctAnswers = 0;
+    for (var item in questions) {
+      if (item.userAnswerIndex == item.correctAnswerIndex) {
+        correctAnswers++;
+      }
+    }
+    CacheHelper.saveData(key: "lastQuiz", value: DateTime.now().toString());
+    emit(CalculateResultState());
+  }
 
 
 

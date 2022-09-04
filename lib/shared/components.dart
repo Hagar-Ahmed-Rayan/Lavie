@@ -17,6 +17,7 @@ import 'package:plantsshop/models/LognModel.dart';
 //import 'dart:html';
 
 import 'package:plantsshop/screens/splash.dart';
+import 'package:plantsshop/shared/style.dart';
 
 Widget defaultTextButton({
   required  function,
@@ -129,8 +130,105 @@ Widget fullDivider() => Container(
   height: 1.0,
   color: Colors.grey[300],
 );
+////////////////////BUTTTON
+class DefaultButton extends StatelessWidget {
+  Function onPress;
+  String text;
+  IconData? icon;
+  double? borderRadius;
+  double? height;
+  Color? backgroundColor;
+  Color? textColor;
+  bool hasBorder;
+  DefaultButton(
+      {Key? key,
+        required this.onPress,
+        required this.text,
+        this.icon,
+        this.borderRadius,
+        this.height,
+        this.backgroundColor,
+        this.textColor,
+        this.hasBorder = false})
+      : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: height ?? 50,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(borderRadius ?? 5),
+            color: backgroundColor ?? Colors.green,
+            border: hasBorder
+                ? Border.all(color: Colors.green, width: 1)
+                : null),
+        child: MaterialButton(
+          onPressed: () {
+            onPress();
+          },
+          minWidth: double.infinity,
+          textColor: Colors.white,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                text,
+                style: AppTextStyle.bodyText()
+                    .copyWith(color: textColor ?? Colors.white),
+              ),
+              if (icon != null) Icon(icon, color: Colors.white)
+            ],
+          ),
+        ));
+  }
+}
+////////////////////////////NAV
+class NavigationUtils {
+  static void navigateTo({
+    required BuildContext context,
+    required Widget destinationScreen,
+  }) =>
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => destinationScreen),
+      );
 
+  static void navigateToWithCallback({
+    required BuildContext context,
+    required Widget destinationScreen,
+    required VoidCallback callback,
+  }) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => destinationScreen,
+      ),
+    ).then(
+          (value) => callback(),
+    );
+  }
+
+  static void navigateAndClearStack({
+    required BuildContext context,
+    required Widget destinationScreen,
+  }) =>
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => destinationScreen,
+        ),
+            (Route<dynamic> route) => false,
+      );
+
+  static void navigateBack({
+    required BuildContext context,
+  }) {
+    FocusScope.of(context).unfocus();
+    if (Navigator.canPop(context)) {
+      Navigator.pop(context);
+    }
+  }
+}
 
 
 /////////////////pincode

@@ -367,3 +367,10 @@ class ShopproductidErrorState extends ShopLoginStates
 
   ShopproductidErrorState();
 }
+/////////////////////////////quiz state
+
+class QuizInitial extends ShopLoginStates {}
+class MoveToNextQuestion extends ShopLoginStates {}
+class MoveToPreviousQuestion extends ShopLoginStates {}
+class ChooseAnswerState extends ShopLoginStates {}
+class CalculateResultState extends ShopLoginStates {}
