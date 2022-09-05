@@ -1,6 +1,6 @@
 # plantsshop
 
-A new Flutter project using APIs.
+A new Flutter project using APIs and sqflite.
 
 
 ## Getting Started
