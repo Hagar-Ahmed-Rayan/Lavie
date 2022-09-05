@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:location/location.dart';
 import 'package:geolocator/geolocator.dart';
@@ -18,6 +19,7 @@ import 'package:plantsshop/models/Getuserinfo.dart';
 import 'package:plantsshop/models/LognModel.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plantsshop/models/Modelgoogle.dart';
+import 'package:plantsshop/models/modelcart.dart';
 import 'package:plantsshop/models/mypostsmodel.dart';
 import 'package:plantsshop/models/productsmodel.dart';
 import 'package:plantsshop/models/seedsmodel.dart';
@@ -33,6 +35,7 @@ import 'package:plantsshop/shared/components.dart';
 import 'package:plantsshop/shared/dio.dart';
 import 'package:plantsshop/shared/endpoints.dart';
 import 'package:plantsshop/shared/locationhelper.dart';
+import 'package:plantsshop/shared/sqflite/cartdatabase.dart';
 
 class ShopLoginCubit extends Cubit<ShopLoginStates> {
   ShopLoginCubit() : super(ShopLoginInitialState());
@@ -1052,13 +1055,113 @@ var productid;
     CacheHelper.saveData(key: "lastQuiz", value: DateTime.now().toString());
     emit(CalculateResultState());
   }
+////add to cart
 
 
+  List<CartModel> cartproducts = [];
 
+  void getAllCartProducts() {
+    emit(CartGetProductsLoadingState());
+    cartproducts.clear();
+    SqlHelper.getAllCartProducts().then((value) {
+      print("sqllllllllllllllget");
+      print(value);
+      for (var element in value) {
+        cartproducts.add(CartModel.fromDB(element));
+      }
+      emit(CartGetProductsSuccessState());
+      print("sqllllllllllllllgetemit");
 
+      getTotalPrice();
+      print("sqllllllllllllllgettotal");
 
+    }).catchError((error) {
+      print("sqllllllllllllllgeterror");
+
+      print(error.toString());
+      emit(CartGetProductsErrorState());
+    });
+  }
+
+  void addToCart(CartModel cartModel) {
+    emit(CartAddProductLoadingState());
+    SqlHelper.insertProduct(cartModel).then((value) {
+      Fluttertoast.showToast(
+        msg: "Added To Cart Successfully",
+        textColor: Colors.white,
+        backgroundColor: Colors.green,
+      );
+      emit(CartAddProductSuccessState());
+      print("sqllllllllllllllinsetdone");
+
+      getTotalPrice();
+    }).catchError((error) {
+      print("sqllllllllllllllinseterror");
+
+      emit(CartAddProductErrorState());
+    });
+  }
+
+  void updateProductQuantity(int quantity, String id) {
+    emit(CartUpdateProductLoadingState());
+    SqlHelper.updateProductQuantity(id, quantity).then((value) {
+   //   getAllCartProducts();
+      emit(CartUpdateProductSuccessState());
+      getTotalPrice();
+    }).catchError((error) {
+      emit(CartUpdateProductErrorState());
+    });
+  }
+
+  void removeProduct(CartModel cartModel) {
+    emit(CartRemoveProductLoadingState());
+    SqlHelper.deleteRecorde(cartModel.id).then((value) {
+      //getAllCartProducts();
+      Fluttertoast.showToast(
+        msg: "Removed From Cart Successfully",
+        textColor: Colors.white,
+        backgroundColor: Colors.green,
+      );
+      getTotalPrice();
+      emit(CartRemoveProductSuccessState());
+    }).catchError((error) {
+      debugPrint(error.toString());
+      emit(CartRemoveProductErrorState());
+    });
+  }
+
+  double price = 0;
+  void getTotalPrice() {
+    price = 0;
+    for (var element in cartproducts) {
+      print("totaaalllllllllerror");
+
+      price += element.price * element.quantity;
+    }
+    emit(CartGetTotalPriceState());
+  }
+  bool showQuiz() {
+
+    String value = CacheHelper.getData(key: 'lastQuiz');
+    if (value == '') {
+      return true;
+    } else {
+      DateTime lastQuiz = DateTime.parse(value);
+      if (lastQuiz.difference(DateTime.now()).inDays >= 7) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
 
 }
+//////////show quiz every week
+
+
+
+
+
 
 
 

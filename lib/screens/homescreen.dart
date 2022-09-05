@@ -5,11 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plantsshop/cubit/cubit.dart';
 import 'package:plantsshop/cubit/states.dart';
+import 'package:plantsshop/models/modelcart.dart';
 import 'package:plantsshop/models/productsmodel.dart';
+import 'package:plantsshop/screens/QUIZ/QUIZSCREEN.dart';
 import 'package:plantsshop/screens/carditems.dart';
 import 'package:plantsshop/screens/searchforproducts.dart';
 import 'package:plantsshop/shared/components.dart';
 import 'package:plantsshop/shared/endpoints.dart';
+import 'package:plantsshop/shared/sqflite/CART.dart';
 List<dynamic>addtocarditems=[];
 Map<String,bool>incart={};
 bool exsit=false;
@@ -50,8 +53,51 @@ class homescreen extends StatelessWidget {
             child: DefaultTabController(
               length: 2,
               child: Scaffold(
-                  appBar: null
-                  ,
+                  appBar: AppBar(
+                    backgroundColor: Colors.green,
+                    flexibleSpace: Center(
+                      child: Image.asset(
+                        "images/lavie.png",
+                        height: 100,
+                        width: 100,
+                      ),
+                    ),
+
+                    actions: [
+                         if (ShopLoginCubit.get(context).showQuiz())
+                            IconButton(
+                          onPressed: () {
+                            NavigationUtils.navigateTo(
+                                context: context,
+                                destinationScreen: const QuizScreen());
+                          },
+                          icon: const Icon(
+                            Icons.lightbulb_outline,
+                            color: Colors.amber,
+                          ),
+                        ),
+                    ],
+                  ),
+                /*  AppBar(
+                    backgroundColor: Colors.green,
+
+                       actions: [
+                 //     if (ShopLoginCubit.get(context).showQuiz())
+                IconButton(
+                onPressed: () {
+          NavigationUtils.navigateTo(
+          context: context,
+          destinationScreen: const QuizScreen());
+          },
+            icon: const Icon(
+              Icons.lightbulb_outline,
+              color: Colors.amber,
+            ),
+          ),
+          ]
+                  ),*/
+
+
                   body: ShopLoginCubit.get(context).products==null?Center(
                     child: CircularProgressIndicator(),
                   ):Padding(
@@ -59,58 +105,16 @@ class homescreen extends StatelessWidget {
 
                     child: Column(
                         children: [
-                          Image.asset('images/lavie.png',
+                      /*    Image.asset('images/lavie.png',
                             //   height: 50,
                           ),
 
                           Image(image: AssetImage('images/branding.png')),
-                          /* TextField(
-          decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                filled: true,
-                hintStyle: TextStyle(color: Colors.grey[800]),
-                hintText: "Type in your text",
-                fillColor: Colors.white70),
-        ),*/
                           SizedBox(
 
                             height: 20,
-                          ),
-
-                         /* Container(
-                            child: TabBar(
-
-                              isScrollable: true,
-                              labelColor: Colors.red,
-                              unselectedLabelColor: Colors.blue,
-                              indicatorColor: Colors.green,
-                              indicatorSize: TabBarIndicatorSize.label,
-                              tabs: [
-                                Tab(
-                                  child: Text(
-                                    'All',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ),
-                                Tab(
-                                  child: Text(
-                                    'Plants',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ),
-
-
-                              ],
-                            ),
                           ),*/
+
 
 
                           Row(
@@ -187,10 +191,12 @@ navto(context, productssearch());
                                   padding: const EdgeInsets.all(2),
                                   child: IconButton(onPressed:(){
 
-                                    navto(context, carditems());
+                                 //   navto(context, carditems());
+                                    navto(context, CartScreen());
+
                                   },
                                       icon:  Icon(
-                                        Icons.shopping_basket_rounded, size: 30,
+                                        Icons.shopping_cart_outlined, size: 30,
                                         color: Colors.white,
                                       ),)
 
@@ -240,7 +246,7 @@ navto(context, productssearch());
                             child: TabBarView(
                               children: [
                                 // first tab bar view widget
-                                    itemproducts(ShopLoginCubit.get(context).products),
+                                    itemproducts(ShopLoginCubit.get(context).products,context),
                                 Text('tools')
 
 
@@ -251,18 +257,6 @@ navto(context, productssearch());
 
 
 
-                          /*  Container(
-                              color: Colors.red,
-                              width: 100,
-                              child: MaterialButton(
-                                  onPressed: () {
-                                    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
-                                    print(   ShopLoginCubit.get(context).products);
-                                  }
-
-                              )
-                          )*/
 
                           /*          Column(
 
@@ -364,41 +358,17 @@ navto(context, productssearch());
 }
 
 
-  Widget itemproducts( dynamic model) =>
+  Widget itemproducts( dynamic model,BuildContext context) =>
 
 
           Expanded(
-            /*   Container(
-color: Colors.red,
-
-
-                    width: 150,
-                    //height: 30,
-                    child: MaterialButton(
-                        onPressed: () {
-                          print("+++=++++*************************************++++++++++");
-                          print(model);
-                          print(model['data'][1]['name']);
-
-                        }
-                    )
-
-
-
-
-
-
-
-
-
-                ),*/
 
 
             child: Container(
               width: double.infinity,
               child: GridView.count(crossAxisCount: 2,
                 children: List.generate(10, (index) =>
-                    gridindex(model['data'][index]),
+                    gridindex(model['data'][index],context),
 
                 ),
 
@@ -416,7 +386,7 @@ color: Colors.red,
 
 
 
-  Widget gridindex(dynamic item) =>
+  Widget gridindex(dynamic item,BuildContext context) =>
 
       Padding(
         padding: const EdgeInsets.all(10.0),
@@ -489,6 +459,17 @@ children: [
                     height: 40.0,
                     child: MaterialButton(
                       onPressed: () {
+                        ShopLoginCubit.get(context).addToCart(
+                          CartModel(
+                            id: item['productId'].toString(),
+                            name: item['name'].toString(),
+                            quantity: 1,
+                            imageUrl:
+                            baseurl+item['imageUrl'],
+                                price:item['price'],
+                            // "https://lavie.orangedigitalcenteregypt.com${item['imageUrl']}",
+                          ),
+                        );
                          exsit=false;
                        // incart.addAll({item['productId']:true});
                        print( item['productId']);

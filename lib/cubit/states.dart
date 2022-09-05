@@ -374,3 +374,22 @@ class MoveToNextQuestion extends ShopLoginStates {}
 class MoveToPreviousQuestion extends ShopLoginStates {}
 class ChooseAnswerState extends ShopLoginStates {}
 class CalculateResultState extends ShopLoginStates {}
+///////////add to cart
+
+class CartGetProductsLoadingState extends ShopLoginStates {}
+class CartGetProductsSuccessState extends ShopLoginStates {}
+class CartGetProductsErrorState extends ShopLoginStates {}
+
+class CartAddProductLoadingState extends ShopLoginStates {}
+class CartAddProductSuccessState extends ShopLoginStates {}
+class CartAddProductErrorState extends ShopLoginStates {}
+
+class CartUpdateProductLoadingState extends ShopLoginStates {}
+class CartUpdateProductSuccessState extends ShopLoginStates {}
+class CartUpdateProductErrorState extends ShopLoginStates {}
+
+class CartRemoveProductLoadingState extends ShopLoginStates {}
+class CartRemoveProductSuccessState extends ShopLoginStates {}
+class CartRemoveProductErrorState extends ShopLoginStates {}
+
+class CartGetTotalPriceState extends ShopLoginStates {}

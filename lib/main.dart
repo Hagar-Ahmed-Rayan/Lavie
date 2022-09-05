@@ -8,12 +8,14 @@ import 'package:plantsshop/shared/cache.dart';
 import 'package:plantsshop/shared/di.dart';
 import 'package:plantsshop/shared/dio.dart';
 import 'package:plantsshop/shared/endpoints.dart';
+import 'package:plantsshop/shared/sqflite/cartdatabase.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
 
   DioHelper.init();
   await CacheHelper.init();
+  await SqlHelper.initDB();
   TOKEN= CacheHelper.getData(key: 'token');
 print("ahooooooooooooooooooooooooooooooooooo");
 print(TOKEN);
