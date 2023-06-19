@@ -1,6 +1,6 @@
 # plantsshop
-
-A new Flutter project using APIs and sqflite.
+plants shop app  using APIs and sqflite.
+demo link https://drive.google.com/file/d/1faCIsycTxtT7nzD-euhGEOiAacbmM5Gf/view?usp=sharing
 
 
 ## Getting Started
